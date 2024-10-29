@@ -16,11 +16,13 @@ import java.util.List;
 public class ArticleApiController {
     @Autowired
     private ArticleService articleService; // 서비스 객체 주입
+
     // GET
     @GetMapping("/api/articles")
     public List<Article> index() {
         return articleService.index();
     }
+
     @GetMapping("/api/articles/{id}")
     public Article show(@PathVariable Long id) {
         return articleService.show(id);
@@ -38,7 +40,7 @@ public class ArticleApiController {
     // PATCH
     @PatchMapping("/api/articles/{id}")
     public ResponseEntity<Article> update(@PathVariable Long id,
-                                         @RequestBody ArticleForm dto) {
+                                          @RequestBody ArticleForm dto) {
         Article updated = articleService.update(id, dto);
         return (updated != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(updated) :
